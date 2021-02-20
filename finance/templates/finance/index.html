@@ -1,0 +1,11 @@
+{% if my_stocks %}
+    <ul>
+    {% for stock in my_stocks %}
+        <li>
+            <a href="{% url 'finance:portfolio' stock.ticker %}"> {{ stock.ticker }} </a>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No stocks are.</p>
+{% endif %}
