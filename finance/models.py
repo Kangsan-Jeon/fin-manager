@@ -3,21 +3,30 @@ from django.db.models.base import Model
 
 # Create your models here.
 
-class User(models.Model):
-    user_id = models.CharField(primary_key=True, max_length=15)
-    name = models.CharField(max_length=20)
-    income = models.IntegerField()
-    expenditure = models.IntegerField()
-    # credit_cards = []
-    
-    def __str__(self) -> str:
-        return "{}\t{}".format(self.user_id, self.name)
-
 class Budget(models.Model):
-    # gubun = 
+    BUDGET_CHOICES = (
+        ("income", "수입"),
+        ("expense", "지출")
+    )
+
+    CARD_CHOICES = (
+        ("NO", "해당없음"),
+        ("SH", "신한"),
+        ("WR", "우리"),
+        ("SS", "삼성"),
+        ("KM", "국민")
+    )
+
+    gubun = models.CharField(max_length=7,
+        choices=BUDGET_CHOICES, 
+        default="income"
+        )
     price = models.IntegerField()
     date = models.DateField()
-    # card = 
+    card = models.CharField(max_length=2,
+        default="NO",
+        choices=CARD_CHOICES
+        )
     
 
 class MyStock(models.Model):

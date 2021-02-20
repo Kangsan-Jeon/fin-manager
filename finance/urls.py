@@ -11,7 +11,7 @@ urlpatterns = [
     path('', views.index, name="index"),
 
     # ex) /daisyjeon/plan
-    path('<str:user_id>/plan/', views.plan, name="plan"),
+    path('budget/', views.budget, name="budget"),
     
     # ex) /daisyjeon/portfolio
     path('portfolio/<str:stock_ticker>/', views.portfolio, name="portfolio"),

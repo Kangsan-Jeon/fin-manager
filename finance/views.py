@@ -1,7 +1,6 @@
 from django.http.response import Http404
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
-from django.template import loader
 
 from .models import MyStock
 
@@ -20,8 +19,8 @@ def index(request):
     }
     return render(request, 'finance/index.html', context)
 
-def plan(request, user_id):
-    return HttpResponse("Here is yout budget plan")
+def budget(request):
+    return render(request, 'finance/budget.html')
 
 def portfolio(request, stock_ticker):
     my_stock = get_object_or_404(MyStock, pk=stock_ticker)
@@ -29,8 +28,3 @@ def portfolio(request, stock_ticker):
 
 def record(request, user_id):
     return HttpResponse("I record your details of exchange, dividend and long/short")
-
-def logout_view(request):
-    logout(request)
-    return render(request, 'finance/base.html')
-
