@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models.base import Model
+from users import models as user_model
 
 # Create your models here.
 
@@ -17,20 +18,32 @@ class Budget(models.Model):
         ("KM", "국민")
     )
 
+    owner = models.ForeignKey(
+        user_model.User,
+        null=True,
+        on_delete=models.CASCADE,
+        related_name='budget_owner'
+    )
     gubun = models.CharField(max_length=7,
         choices=BUDGET_CHOICES, 
         default="income"
-        )
+    )
     price = models.IntegerField()
     date = models.DateField()
     card = models.CharField(max_length=2,
         default="NO",
         choices=CARD_CHOICES
-        )
-    
+    )
+
 
 class MyStock(models.Model):
-    ticker = models.CharField(max_length=10, primary_key=True)
+    owner = models.ForeignKey(
+        user_model.User,
+        null=True,
+        on_delete=models.CASCADE,
+        related_name='mystock_owner'
+    )
+    ticker = models.CharField(max_length=10)
     market = models.CharField(max_length=10)
     currency = models.CharField(max_length=3)
     purchase_price = models.FloatField()
