@@ -2,7 +2,7 @@ Here is main.html
 
 <form action="{% url 'users:main' %}" method='post'>
     {% csrf_token %}
-    <input type='input' name='username' placeholder="username">
+    <input type='input' name='user_id' placeholder="user_id">
     <input type='password' name='password' placeholder="password">
     <input type='submit' value="Login">
 

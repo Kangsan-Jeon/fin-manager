@@ -35,7 +35,6 @@ class Budget(models.Model):
         choices=CARD_CHOICES
     )
 
-
 class MyStock(models.Model):
     owner = models.ForeignKey(
         user_model.User,
