@@ -12,9 +12,9 @@ def main(request):
         return render(request, 'users/main.html')
     
     elif request.method == "POST":
-        user_id = request.POST['user_id']
+        username = request.POST['username']
         password = request.POST['password']
-        user = authenticate(request, user_id=user_id, password=password)
+        user = authenticate(request, username=username, password=password)
 
         if user is not None:
             login(request, user)
@@ -33,10 +33,10 @@ def signup(request):
         if form.is_valid():
             form.save()
 
-            user_id = form.cleaned_data["user_id"]
+            username = form.cleaned_data["username"]
             password = form.cleaned_data["password"]
 
-            user = authenticate(request, user_id=user_id, password=password)
+            user = authenticate(request, username=username, password=password)
 
             if user is not None:
                 login(request, user)

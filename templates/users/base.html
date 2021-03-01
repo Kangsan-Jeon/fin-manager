@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charser="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="chrome">
+
+        <title>
+            {% block title %}
+            Finance Manager
+            {% endblock title%}
+        </title>
+    </head>
+
+    <body>
+        <div>
+            {% block content %}
+            content
+            {% endblock content %}
+        </div>
+
+        {% include "users/footer.html" %}
+
+        <footer>
+            footer
+        </footer>
+    </body>
+</html>
