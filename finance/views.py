@@ -23,6 +23,7 @@ def budget(request):
     return render(request, 'finance/budget.html')
 
 def portfolio(request, stock_ticker):
+    print(stock_ticker)
     my_stock = get_object_or_404(MyStock, pk=stock_ticker)
     return render(request, 'finance/portfolio.html', {"my_stock": my_stock})
 

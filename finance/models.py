@@ -18,12 +18,12 @@ class Budget(models.Model):
         ("KM", "국민")
     )
 
-    owner = models.ForeignKey(
-        user_model.User,
-        null=True,
-        on_delete=models.CASCADE,
-        related_name='budget_owner'
-    )
+    # owner = models.ForeignKey(
+    #     user_model.User,
+    #     null=True,
+    #     on_delete=models.CASCADE,
+    #     related_name='budget_owner'
+    # )
     gubun = models.CharField(max_length=7,
         choices=BUDGET_CHOICES, 
         default="income"
@@ -36,15 +36,19 @@ class Budget(models.Model):
     )
 
 class MyStock(models.Model):
-    owner = models.ForeignKey(
-        user_model.User,
-        null=True,
-        on_delete=models.CASCADE,
-        related_name='mystock_owner'
+    CURRENCY_CHOICES = (
+        ("USD", "USD"),
+        ("KRW", "KRW")
     )
-    ticker = models.CharField(max_length=10)
+    # owner = models.ForeignKey(
+    #     user_model.User,
+    #     null=True,
+    #     on_delete=models.CASCADE,
+    #     related_name='mystock_owner'
+    # )
+    ticker = models.CharField(max_length=10, primary_key=True)
     market = models.CharField(max_length=10)
-    currency = models.CharField(max_length=3)
+    currency = models.CharField(max_length=3, choices=CURRENCY_CHOICES, default="USD")
     purchase_price = models.FloatField()
     amount = models.IntegerField()
     purchase_date = models.DateField()
