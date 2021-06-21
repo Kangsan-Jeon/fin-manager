@@ -14,7 +14,7 @@ urlpatterns = [
     path('budget/', views.budget, name="budget"),
     
     # ex) /daisyjeon/portfolio
-    path('portfolio/<str:stock_ticker>/', views.portfolio, name="portfolio"),
+    path('portfolio/', views.portfolio, name="portfolio"),
 
     # ex) /daisyjeon/record
     path('record/', views.record, name="record"),
