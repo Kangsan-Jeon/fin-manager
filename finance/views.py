@@ -25,6 +25,7 @@ def budget(request):
 def portfolio(request):
     my_stocks = MyStock.objects.all()
     context = {
+        'active_page': 'portfolio',
         'my_stocks': my_stocks
     }
     return render(request, 'finance/portfolio.html', context)
