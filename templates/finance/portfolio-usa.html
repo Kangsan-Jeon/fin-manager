@@ -1,0 +1,68 @@
+{% extends 'finance/base.html' %}
+
+{% load finance_tag %}
+
+{% block title %}
+<title>Portfolio:USA</title>
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">USA-stocks</h1>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Stock List</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Ticker</th>
+                            <th>Purchase price($)</th>
+                            <th>Current price($)</th>
+                            <th>Amount</th>
+                            <th>Earning($)</th>
+                            <th>Earning rate(%)</th>
+                            <th>Purchase date</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Ticker</th>
+                            <th>Purchase price($)</th>
+                            <th>Current price($)</th>
+                            <th>Amount</th>
+                            <th>Earning($)</th>
+                            <th>Earning rate(%)</th>
+                            <th>Purchase date</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        {% for stock in usa_stocks %}
+                        {% with cur_price=stock.get_current_price %}
+                        <tr>
+                            <td>{{ stock.ticker }}</td>
+                            <td>{{ stock.purchase_price }}&nbsp $</td>
+                            <td>{{ cur_price }}&nbsp $</td>
+                            <td>{{ stock.amount }}</td>
+                            <td class="{% if stock.get_earning > 0 %} text-success {% elif stock.get_earning < 0 %} text-danger {% endif %}">{{ stock.get_earning }}&nbsp $</td>
+                            <td class="{% if stock.get_earning_rate > 0 %} text-success {% elif stock.get_earning_rate < 0 %} text-danger {% endif %}">{{ stock.get_earning_rate }}&nbsp %</td>
+                            <td>{{ stock.purchase_date }}</td>
+                        {% endwith %}
+                        {% endfor %}
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

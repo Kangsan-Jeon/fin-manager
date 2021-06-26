@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models.base import Model
 from users import models as user_model
+import yfinance as yf
 
 # Create your models here.
 
@@ -40,6 +41,12 @@ class MyStock(models.Model):
         ("USD", "USD"),
         ("KRW", "KRW")
     )
+    ACCOUNT_CHOICES = (
+        ("KW", "키움증권"),
+        ("DS", "대신증권"),
+        ("HT", "한국투자증권"),
+        ("MA", "미래에셋")
+    )
     # owner = models.ForeignKey(
     #     user_model.User,
     #     null=True,
@@ -48,6 +55,7 @@ class MyStock(models.Model):
     # )
     ticker = models.CharField(max_length=10, primary_key=True)
     market = models.CharField(max_length=10)
+    account = models.CharField(max_length=5, choices=ACCOUNT_CHOICES, default="KW")
     currency = models.CharField(max_length=3, choices=CURRENCY_CHOICES, default="USD")
     purchase_price = models.FloatField()
     amount = models.IntegerField()
@@ -56,4 +64,26 @@ class MyStock(models.Model):
     def __str__(self) -> str:
         return "{}:{}".format(self.market, self.ticker)
 
+    def get_current_price_earning(self) -> tuple:
+        data = yf.Ticker(self.ticker)
+        current_price = data.history(period='1d')
+        earning = round((current_price - self.purchase_price)*self.amount, 2)
+        earning_rate = round((current_price/self.purchase_price - 1)*100, 2)
+        return (current_price, earning, earning_rate)
 
+    # @property
+    # def current_price(self) -> float:
+    #     data = yf.Ticker(self.ticker)
+    #     today_price = data.history(period='1d')
+    #     return round(today_price['Close'][0], 2)
+
+    # def get_earning(self) -> float:
+    #     return round((self.current_price - self.purchase_price)*self.amount, 2)
+    
+    # def get_earning_rate(self) -> float:
+    #     return round((self.current_price/self.purchase_price - 1)*100, 2)
+
+
+    # def get_total_current_price(self) -> float:
+    #     return self.
+    

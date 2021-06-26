@@ -15,6 +15,10 @@ urlpatterns = [
     
     # ex) /daisyjeon/portfolio
     path('portfolio/', views.portfolio, name="portfolio"),
+    path('portfolio/usa', views.portfolio_usa, name="portfolio-usa"),
+    path('portfolio/kor', views.portfolio_kor, name="portfolio-kor"),
+    path('portfolio/iruda', views.portfolio_iruda, name="portfolio-iruda"),
+    path('portfolio/etc', views.portfolio_etc, name="portfolio-etc"),
 
     # ex) /daisyjeon/record
     path('record/', views.record, name="record"),
