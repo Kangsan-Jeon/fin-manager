@@ -64,26 +64,11 @@ class MyStock(models.Model):
     def __str__(self) -> str:
         return "{}:{}".format(self.market, self.ticker)
 
-    def get_current_price_earning(self) -> tuple:
+    @property
+    def current_price(self) -> float:
         data = yf.Ticker(self.ticker)
-        current_price = data.history(period='1d')
-        earning = round((current_price - self.purchase_price)*self.amount, 2)
-        earning_rate = round((current_price/self.purchase_price - 1)*100, 2)
-        return (current_price, earning, earning_rate)
-
-    # @property
-    # def current_price(self) -> float:
-    #     data = yf.Ticker(self.ticker)
-    #     today_price = data.history(period='1d')
-    #     return round(today_price['Close'][0], 2)
-
-    # def get_earning(self) -> float:
-    #     return round((self.current_price - self.purchase_price)*self.amount, 2)
-    
-    # def get_earning_rate(self) -> float:
-    #     return round((self.current_price/self.purchase_price - 1)*100, 2)
-
-
-    # def get_total_current_price(self) -> float:
-    #     return self.
+        current_price = data.history(period='1d')['Close'][0]
+        self.earning = round((current_price - self.purchase_price)*self.amount, 2)
+        self.earning_rate = round((current_price/self.purchase_price - 1)*100, 2)
+        return round(current_price, 2)
     

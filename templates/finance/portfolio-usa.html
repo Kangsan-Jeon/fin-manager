@@ -1,6 +1,6 @@
 {% extends 'finance/base.html' %}
 
-{% load finance_tag %}
+{% load static %}
 
 {% block title %}
 <title>Portfolio:USA</title>
@@ -12,6 +12,51 @@
 
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800">USA-stocks</h1>
+
+    <div class="row">
+        <!-- Pie Chart -->
+        <div class="col-xl-4 col-lg-5">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div
+                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Asset Composition</h6>
+                    <div class="dropdown no-arrow">
+                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                            aria-labelledby="dropdownMenuLink">
+                            <div class="dropdown-header">Dropdown Header:</div>
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="chart-pie pt-4 pb-2">
+                        <canvas id="myPieChart"></canvas>
+                    </div>
+                    <div class="mt-4 text-center small">
+                        <span class="mr-2">
+                            <i class="fas fa-circle text-primary"></i> Direct
+                        </span>
+                        <span class="mr-2">
+                            <i class="fas fa-circle text-success"></i> Social
+                        </span>
+                        <span class="mr-2">
+                            <i class="fas fa-circle text-info"></i> Referral
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
@@ -45,16 +90,14 @@
                     </tfoot>
                     <tbody>
                         {% for stock in usa_stocks %}
-                        {% with cur_price=stock.get_current_price %}
                         <tr>
                             <td>{{ stock.ticker }}</td>
                             <td>{{ stock.purchase_price }}&nbsp $</td>
-                            <td>{{ cur_price }}&nbsp $</td>
+                            <td>{{ stock.current_price }}&nbsp $</td>
                             <td>{{ stock.amount }}</td>
-                            <td class="{% if stock.get_earning > 0 %} text-success {% elif stock.get_earning < 0 %} text-danger {% endif %}">{{ stock.get_earning }}&nbsp $</td>
-                            <td class="{% if stock.get_earning_rate > 0 %} text-success {% elif stock.get_earning_rate < 0 %} text-danger {% endif %}">{{ stock.get_earning_rate }}&nbsp %</td>
+                            <td class="{% if stock.earning > 0 %} text-success {% elif stock.earning < 0 %} text-danger {% endif %}">{{ stock.earning }}&nbsp $</td>
+                            <td class="{% if stock.earning_rate > 0 %} text-success {% elif stock.earning_rate < 0 %} text-danger {% endif %}">{{ stock.earning_rate }}&nbsp %</td>
                             <td>{{ stock.purchase_date }}</td>
-                        {% endwith %}
                         {% endfor %}
                         </tr>
                     </tbody>
@@ -65,4 +108,10 @@
 
 </div>
 
+{% endblock %}
+
+{% block script %}
+<!-- Page level custom scripts -->
+<script src="{% static 'js/demo/chart-area-demo.js' %}"></script>
+<script src="{% static 'js/demo/chart-pie-demo.js' %}"></script>
 {% endblock %}
