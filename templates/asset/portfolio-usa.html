@@ -1,4 +1,4 @@
-{% extends 'finance/base.html' %}
+{% extends 'asset/base.html' %}
 
 {% load static %}
 
@@ -133,16 +133,18 @@
                         </tr>
                     </tfoot>
                     <tbody>
-                        {% for stock in usa_stocks %}
-                        <tr>
-                            <td>{{ stock.ticker }}</td>
-                            <td>{{ stock.purchase_price }}&nbsp $</td>
-                            <td>{{ stock.current_price }}&nbsp $</td>
-                            <td>{{ stock.amount }}</td>
-                            <td class="{% if stock.earning > 0 %} text-success {% elif stock.earning < 0 %} text-danger {% endif %}">{{ stock.earning }}&nbsp $</td>
-                            <td class="{% if stock.earning_rate > 0 %} text-success {% elif stock.earning_rate < 0 %} text-danger {% endif %}">{{ stock.earning_rate }}&nbsp %</td>
-                            <td>{{ stock.purchase_date }}</td>
-                        {% endfor %}
+                        {% if usa_stcks.length > 0 %}
+                            {% for stock in usa_stocks %}
+                            <tr>
+                                <td>{{ stock.ticker }}</td>
+                                <td>{{ stock.purchase_price }}&nbsp $</td>
+                                <td>{{ stock.current_price }}&nbsp $</td>
+                                <td>{{ stock.amount }}</td>
+                                <td class="{% if stock.earning > 0 %} text-success {% elif stock.earning < 0 %} text-danger {% endif %}">{{ stock.earning }}&nbsp $</td>
+                                <td class="{% if stock.earning_rate > 0 %} text-success {% elif stock.earning_rate < 0 %} text-danger {% endif %}">{{ stock.earning_rate }}&nbsp %</td>
+                                <td>{{ stock.purchase_date }}</td>
+                            {% endfor %}
+                        {% endif %}
                         </tr>
                     </tbody>
                 </table>

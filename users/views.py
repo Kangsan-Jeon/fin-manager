@@ -18,7 +18,7 @@ def main(request):
 
         if user is not None:
             login(request, user)
-            return HttpResponseRedirect(reverse('finance:index'))
+            return HttpResponseRedirect(reverse('asset:index'))
         else:
             return render(request, 'users/main.html')
 
@@ -40,7 +40,7 @@ def signup(request):
 
             if user is not None:
                 login(request, user)
-                return HttpResponseRedirect(reverse('finance:index'))
+                return HttpResponseRedirect(reverse('asset:index'))
             else:
                 return render(request, 'users/main.html')
         
