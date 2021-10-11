@@ -36,7 +36,7 @@ class Budget(models.Model):
         choices=CARD_CHOICES
     )
 
-class MyStock(models.Model):
+class Portfolio(models.Model):
     CURRENCY_CHOICES = (
         ("USD", "USD"),
         ("KRW", "KRW")
