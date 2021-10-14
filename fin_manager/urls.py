@@ -16,11 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-
+from rest_framework.schemas import get_schema_view
 
 urlpatterns = [
     path('', include('asset.urls')),
     path('users/', include("users.urls"), name='users'),
     path('admin/', admin.site.urls),
-    path('api/', include('api.urls'))
+    path('api/', include('api.urls')),
+    path('openapi/', get_schema_view(
+        title="Fin Manager",
+        description="API developers hoping to user our service"
+    ), name='openapi-schema')
 ]

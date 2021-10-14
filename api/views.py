@@ -12,9 +12,10 @@ from asset.models import Portfolio
 def apiOverview(request):
     api_urls = {
         'Portfolio List': '/portfolio-list/',
-        'Create': '/portfolio-create/',
-        'Update': '/portfolio-update/<str:pk>/',
-        'Delete': '/portfolio-delete/<str:pk>/',
+        'Portfolio Detail': '/portfolio-detail/<str:pk>/',
+        'Portfolio Create': '/portfolio-create/',
+        'Portfolio Update': '/portfolio-update/<str:pk>/',
+        'Portfolio Delete': '/portfolio-delete/<str:pk>/',
     }
     return Response(api_urls)
 
