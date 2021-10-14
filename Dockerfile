@@ -1,7 +1,7 @@
-FROM python:3.8
+FROM python:3.8-slim-buster
 
-WORKDIR /code/
-COPY . /code/
+WORKDIR /opt/code/
+COPY . /opt/code/
 RUN pip install --upgrade pip \
     -r requirements.txt
 
